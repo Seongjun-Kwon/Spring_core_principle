@@ -12,21 +12,36 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+//예상 호출 결과
+//Call AppConfig.memberService
+//Call AppConfig.memberRepository
+//Call AppConfig.memberRepository
+//Call AppConfig.orderService
+//Call AppConfig.memberRepository
+
+//실제 호출 결과
+//Call AppConfig.memberService
+//Call AppConfig.memberRepository
+//Call AppConfig.orderService
+
 @Configuration
 public class AppConfig {
 
     @Bean
     public MemberService memberService() {
+        System.out.println("Call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("Call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("Call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
